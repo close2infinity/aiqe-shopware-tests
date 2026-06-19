@@ -14,14 +14,13 @@ context: |
      Domain: e-commerce platform
      
      - When facing any non-trivial architectural or framework decision, write an ADR (Architecture Decision Record).
-     - When documenting architecture that can be visualize, creatze a C4 diagram. 
+     - When documenting architecture that can be visualize, create a C4 diagram.
 
 # Per-artifact rules (optional)
 # Add custom rules for specific artifacts.
 # Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always include a "Non-goals" section
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
+rules:
+     tasks:
+       - When working on any task make sure to create/check out a branch from main that is named according to gitflow and includes 
+         a reference to the prpoposal and the task number.
+       - When finishing any task, create a PR to main and ask the user to review it. Don't merge before the user has approved the changes.
