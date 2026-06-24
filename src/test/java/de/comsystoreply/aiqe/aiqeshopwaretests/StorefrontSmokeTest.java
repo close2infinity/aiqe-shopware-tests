@@ -32,33 +32,37 @@ class StorefrontSmokeTest {
         if (baseUrl == null) {
             SHOPWARE.start();
             final String shopUrl = "http://" + SHOPWARE.getHost() + ":" + SHOPWARE.getMappedPort(80);
-            // Shopware's sales channel is pre-configured for http://localhost (port 80).
-            // Update the domain to match the dynamic port assigned by Testcontainers.
-            try {
-                var sqlResult = SHOPWARE.execInContainer(
-                        "mysql", "-h", "127.0.0.1", "-u", "root", "-proot", "shopware", "-e",
-                        "UPDATE sales_channel_domain SET url = '" + shopUrl + "' WHERE url = 'http://localhost';"
-                );
-                if (sqlResult.getExitCode() != 0) {
-                    throw new RuntimeException("SQL update failed: " + sqlResult.getStderr());
-                }
-                var cacheResult = SHOPWARE.execInContainer(
-                        "php", "/var/www/html/bin/console", "cache:clear"
-                );
-                if (cacheResult.getExitCode() != 0) {
-                    throw new RuntimeException("Cache clear failed: " + cacheResult.getStderr());
-                }
-            } catch (RuntimeException e) {
-                throw e;
-            } catch (Exception e) {
-                throw new RuntimeException("Failed to configure Shopware sales channel domain", e);
-            }
+            configureSalesChannelDomain(shopUrl);
             Configuration.baseUrl = shopUrl;
         } else {
             Configuration.baseUrl = baseUrl;
         }
 
         Configuration.browserSize = "1280x800";
+    }
+
+    // Shopware's sales channel is pre-configured for http://localhost (port 80).
+    // Update the domain to match the dynamic port assigned by Testcontainers.
+    private static void configureSalesChannelDomain(final String shopUrl) {
+        try {
+            final var sqlResult = SHOPWARE.execInContainer(
+                    "mysql", "-h", "127.0.0.1", "-u", "root", "-proot", "shopware", "-e",
+                    "UPDATE sales_channel_domain SET url = '" + shopUrl + "' WHERE url = 'http://localhost';"
+            );
+            if (sqlResult.getExitCode() != 0) {
+                throw new RuntimeException("SQL update failed: " + sqlResult.getStderr());
+            }
+            final var cacheResult = SHOPWARE.execInContainer(
+                    "php", "/var/www/html/bin/console", "cache:clear"
+            );
+            if (cacheResult.getExitCode() != 0) {
+                throw new RuntimeException("Cache clear failed: " + cacheResult.getStderr());
+            }
+        } catch (final RuntimeException e) {
+            throw e;
+        } catch (final Exception e) {
+            throw new RuntimeException("Failed to configure Shopware sales channel domain", e);
+        }
     }
 
     @Test
