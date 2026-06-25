@@ -10,7 +10,6 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -72,12 +71,13 @@ public class DiscoveryRunner {
 
     private static void writeJson(final String url, final boolean authRequired,
                                   final Map<String, List<String>> elements, final String slug) {
-        final var snapshot = new LinkedHashMap<String, Object>();
-        snapshot.put("url", url);
-        snapshot.put("title", Selenide.title());
-        snapshot.put("journey_hint", slug.replaceAll("-\\d+$", ""));
-        snapshot.put("auth_required", authRequired);
-        snapshot.put("elements", elements);
+        final var snapshot = Map.of(
+                "url", url,
+                "title", Selenide.title(),
+                "journey_hint", slug.replaceAll("-\\d+$", ""),
+                "auth_required", authRequired,
+                "elements", elements
+        );
 
         final var json = new GsonBuilder().setPrettyPrinting().create().toJson(snapshot);
 
