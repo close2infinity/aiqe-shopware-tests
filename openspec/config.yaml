@@ -21,8 +21,9 @@ context: |
 # Example:
 rules:
      tasks:
-       - When starting implementation of a proposal, create a branch from master that is named according to gitflow and includes
-       - a reference to the prpoposal.
+       - When starting implementation of a proposal, create a branch from master that is named according to gitflow and includes a reference to the proposal.
        - When working on any task make sure to create/check out a branch from the proposal branch that is named according to gitflow and includes the task number.
        - Before finishing a task, run all available regression tests and make sure they pass.
-       - When finishing any task, create a PR to master and ask the user to review it. Don't merge before the user has approved the changes.
+       - When finishing any task, create a PR to the proposal branch and ask the user to review it. Don't merge before the user has approved the changes.
+       - When finishing any proposal, create a PR to the master branch and ask the user to review it. Don't merge before the user has approved the changes.
+
