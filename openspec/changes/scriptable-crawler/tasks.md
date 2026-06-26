@@ -15,8 +15,8 @@
 
 ## 3. Bootstrap Script
 
-- [ ] 3.1 Create `discovery-scripts/bootstrap.yml` that reproduces the previous hardcoded crawl: open homepage, follow each top-level nav link with a snapshot, open one product per nav page with a snapshot, log in with dockware credentials, snapshot account overview and order history
+- [x] 3.1 Create `discovery-scripts/bootstrap.yml` that reproduces the previous hardcoded crawl: open homepage, follow each top-level nav link with a snapshot, open one product per nav page with a snapshot, log in with dockware credentials, snapshot account overview and order history
 
 ## 4. Skill Update
 
-- [ ] 4.1 Update `.claude/skills/discover-tests/SKILL.md` to follow the round model: inspect snapshots → write one script → execute → read new snapshots → hand back to user with findings and suggested next steps
+- [x] 4.1 Update `.claude/skills/discover-tests/SKILL.md` to follow the round model: inspect snapshots → write one script → execute → read new snapshots → hand back to user with findings and suggested next steps
