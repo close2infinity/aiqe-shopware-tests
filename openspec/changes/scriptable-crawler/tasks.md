@@ -1,7 +1,7 @@
 ## 1. Dependency and Build Setup
 
-- [ ] 1.1 Add SnakeYAML dependency to `build.gradle` under `testImplementation` and verify `./gradlew testClasses` compiles cleanly
-- [ ] 1.2 Add `args` support to the `discover` Gradle task so `--args` is forwarded to `DiscoveryRunner.main()`
+- [x] 1.1 Add SnakeYAML dependency to `build.gradle` under `testImplementation` and verify `./gradlew testClasses` compiles cleanly
+- [x] 1.2 Add `args` support to the `discover` Gradle task so `--args` is forwarded to `DiscoveryRunner.main()`
 
 ## 2. YAML Script Interpreter
 
